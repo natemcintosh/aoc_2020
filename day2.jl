@@ -1,21 +1,27 @@
-
-function pswd_is_valid_part_1(input_data)
+function parse_input_line(line)
     pattern = r"^(\d+)\-(\d+)\s(\w):\s(\w+)"
-    m = match(pattern, input_data)
+    m = match(pattern, line)
     if m === nothing
         error("Was not able to correctly parse the password")
     end
 
     # Get the maximum and minimum numbers, and create functions that compare numbers to
     # those numbers
-    min_num = parse(Int, m.captures[1])
-    max_num = parse(Int, m.captures[2])
+    first_num = parse(Int, m.captures[1])
+    last_num = parse(Int, m.captures[2])
 
     # Get the letter in question
     letter = m.captures[3]
 
     # Get the password
     pswd = m.captures[4]
+
+    return (first_num, last_num, letter, pswd)
+end
+
+
+function pswd_is_valid_part_1(input_data)
+    min_num, max_num, letter, pswd = parse_input_line(input_data)
 
     # Count the number of instances of said letter
     num_instances = count(letter, pswd)
@@ -26,21 +32,10 @@ end
 
 
 function pswd_is_valid_part_2(input_data)
-    pattern = r"^(\d+)\-(\d+)\s(\w):\s(\w+)"
-    m = match(pattern, input_data)
-    if m === nothing
-        error("Was not able to correctly parse the password")
-    end
+    first_num, last_num, letter, pswd = parse_input_line(input_data)
 
-    # Get the first and last indices to check (it uses 1 based indexing)
-    first_num = parse(Int, m.captures[1])
-    last_num = parse(Int, m.captures[2])
-
-    # Get the character in question
-    character = only(m.captures[3])
-
-    # Get the password
-    pswd = m.captures[4]
+    # Convert the letter from a string to a character
+    character = only(letter)
 
     # Check for matches
     at_first_index = pswd[first_num] == character
