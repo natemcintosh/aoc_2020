@@ -52,11 +52,13 @@ end
 
 
 # Script
-filename = "inputs/day2.txt"
-input_data = readlines(filename)
+@time begin
+    filename = "inputs/day2.txt"
+    input_data = readlines(filename)
 
-part1_solution = count(pswd_is_valid_part_1, input_data)
-@show part1_solution
+    part1_solution = count(pswd_is_valid_part_1, input_data)
+    @show part1_solution
 
-part2_solution = count(pswd_is_valid_part_2, input_data)
-@show part2_solution
+    part2_solution = count(pswd_is_valid_part_2, input_data)
+    @show part2_solution
+end

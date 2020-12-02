@@ -15,11 +15,13 @@ function part2(input_numbers)
 end
 
 # Script
-filename = "inputs/day1.txt"
-input_numbers = read_input(filename)
+@time begin
+    filename = "inputs/day1.txt"
+    input_numbers = read_input(filename)
 
-part1_solution = part1(input_numbers)
-@show part1_solution
+    part1_solution = part1(input_numbers)
+    @show part1_solution
 
-part2_solution = part2(input_numbers)
-@show part2_solution
+    part2_solution = part2(input_numbers)
+    @show part2_solution
+end
