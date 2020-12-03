@@ -5,8 +5,7 @@ function parse_input_line(line)
         error("Was not able to correctly parse the password")
     end
 
-    # Get the maximum and minimum numbers, and create functions that compare numbers to
-    # those numbers
+    # Get the first and last numbers
     first_num = parse(Int, m.captures[1])
     last_num = parse(Int, m.captures[2])
 
