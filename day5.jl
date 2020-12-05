@@ -13,16 +13,14 @@ end
 
 function recursive_reduce(text, positions, forward_char, backward_char)
     (head, tail) = Iterators.peel(text)
-    # middle = Int(floor(median(positions)))
     middle = positions |> median |> floor |> Int
     if head == forward_char
         new_position = first(positions):middle
     elseif head == backward_char
         new_position = middle+1:last(positions)
     else
-        error("Didn't get a B or F in $text")
+        error("Didn't get a $first_char or $backward_char in $text")
     end
-    # @show positions, text, new_position
     if length(new_position) == 1
         return only(new_position)
     end
@@ -42,11 +40,11 @@ end
     input = readlines(filename)
 
     # Part 1
-    part1_solution = maximum(seat_ID, input)
+    all_seat_ids = seat_ID.(input) |> sort
+    part1_solution = maximum(all_seat_ids)
     @show part1_solution
 
-    # Part 2
-    all_seat_ids = seat_ID.(input) |> sort
+    # Part 2    
     seat_before_me_idx = findall(x -> x > 1, diff(all_seat_ids))
     part2_solution = only(all_seat_ids[seat_before_me_idx]) + 1
     @show part2_solution
