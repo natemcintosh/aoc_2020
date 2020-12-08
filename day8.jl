@@ -1,8 +1,6 @@
 function build_instructions(filename)
     boot_code = readlines(filename) .|> split
-    instructions = first.(boot_code)
-    arguments = @. parse(Int, last(boot_code))
-    [Pair(instr, arg) for (instr, arg) in zip(instructions, arguments)]
+    [Pair(first(line), parse(Int, last(line))) for line in boot_code]
 end
 
 
