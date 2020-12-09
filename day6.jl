@@ -1,11 +1,6 @@
-function parse_answers(filename)
-    read(filename, String) |> x -> split(x, "\n\n")
-end
-
 @time begin
     # Script
-    filename = "inputs/day6.txt"
-    answers = parse_answers(filename)
+    answers = read("inputs/day6.txt", String) |> x -> split(x, "\n\n")
 
     # Part 1
     part1_answers = replace.(answers, "\n"=>"")
