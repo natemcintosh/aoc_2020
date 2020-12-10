@@ -38,7 +38,7 @@ function part2(adapters)
             item_diff = adapters[i+j]-adapters[i]
 
             # If it's > 3, not reachable.
-            # If it's <= 3, we can reach the item at i+j from i. 
+            # If it's <= 3, we can reach the item at i+j from i.
             # Add the number of ways to get to item i to the number at i+j
             if item_diff <= 3
                 different_paths[i+j] += different_paths[i]
@@ -47,16 +47,17 @@ function part2(adapters)
     end
     return last(different_paths)
     # This is really just a big accumulation?
-    # How can we potentially replace this with some simpler functions?
+    # Could this be replaced with a few simpler functions?
 end
 
 
 @time begin
-    adapters = "inputs/day10.txt" |>
-        readlines |>
-        x -> parse.(Int, x) |>
+    adapters = "inputs/day10.txt"         |>
+        readlines                         |>
+        x -> parse.(Int, x)               |>
         x -> vcat([0, maximum(x) + 3], x) |>
         sort
+
     part1_solution = part1(adapters)
     @show part1_solution
 
