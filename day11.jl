@@ -5,17 +5,17 @@ function create_bool_array(filename)
     vcat([reshape(slice, :, length(slice)) for slice in nested]...)
 end
 
+const directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+
 function count_adjacent_occupied(arr::AbstractArray, idx)
-    row = idx[1]
-    col = idx[2]
     sum(
-        arr[row_i, col_i] == '#'
-        for (row_i, col_i) in Iterators.product([row-1,row,row+1], [col-1,col,col+1])
-        if checkbounds(Bool, arr, row_i, col_i) && !((row_i == row) && (col_i == col))
+        arr[idx[1]+row, idx[2]+col] == '#'
+        for (row, col) in directions
+        if checkbounds(Bool, arr, idx[1]+row, idx[2]+col)
     )
 end
 
-function iterate_part1!(arr)
+function iterate_part1(arr)
     # At empty spots, check for 0 occupied adjacent seats
     all_empty_adjacents = [
         x for x in findall(x -> x == 'L', arr) if count_adjacent_occupied(arr, x) == 0
@@ -27,15 +27,14 @@ function iterate_part1!(arr)
     ]
 
     # At the end, carry out the swaps
-    arr[all_empty_adjacents] .=  '#'
-    arr[four_or_more] .= 'L'
+    new_arr = copy(arr)
+    new_arr[all_empty_adjacents] .=  '#'
+    new_arr[four_or_more] .= 'L'
 
     # Count the number of changes
-    n_changes = sum(arr .!= arr)
-    (arr, n_changes)
+    n_changes = sum(new_arr .!= arr)
+    (new_arr, n_changes)
 end
-
-const directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 
 function can_see_occupied_seat(arr, idx, direction)
     # Start from idx, and move in direction until we either
@@ -60,7 +59,7 @@ function count_sight_occupied(arr, idx)
     @_ count(can_see_occupied_seat(arr, idx, _), directions)
 end
 
-function iterate_part2!(arr)
+function iterate_part2(arr)
     # At empty spots, check for 0 occupied adjacent seats
     all_empty_adjacents = [
         x for x in findall(x -> x == 'L', arr) if count_sight_occupied(arr, x) == 0
@@ -72,12 +71,13 @@ function iterate_part2!(arr)
     ]
 
     # At the end, carry out the swaps
-    arr[all_empty_adjacents] .=  '#'
-    arr[four_or_more] .= 'L'
+    new_arr = copy(arr)
+    new_arr[all_empty_adjacents] .=  '#'
+    new_arr[four_or_more] .= 'L'
 
     # Count the number of changes
-    n_changes = sum(arr .!= arr)
-    (arr, n_changes)
+    n_changes = sum(new_arr .!= arr)
+    (new_arr, n_changes)
 end
 
 function solve(arr, iterate_fn)
