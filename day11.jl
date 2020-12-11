@@ -15,15 +15,15 @@ function count_adjacent_occupied(arr::AbstractArray, idx)
     )
 end
 
-function iterate_part1(arr)
+function iterate(arr, adjacent_fn, tolerance)
     # At empty spots, check for 0 occupied adjacent seats
     all_empty_adjacents = [
-        x for x in findall(x -> x == 'L', arr) if count_adjacent_occupied(arr, x) == 0
+        x for x in findall(x -> x == 'L', arr) if adjacent_fn(arr, x) == 0
     ]
 
     # At occupied spots, check for four or more occupied adjacent spots
     four_or_more = [
-        x for x in findall(x -> x == '#', arr) if count_adjacent_occupied(arr, x) >= 4
+        x for x in findall(x -> x == '#', arr) if adjacent_fn(arr, x) >= tolerance
     ]
 
     # At the end, carry out the swaps
@@ -59,31 +59,10 @@ function count_sight_occupied(arr, idx)
     @_ count(can_see_occupied_seat(arr, idx, _), directions)
 end
 
-function iterate_part2(arr)
-    # At empty spots, check for 0 occupied adjacent seats
-    all_empty_adjacents = [
-        x for x in findall(x -> x == 'L', arr) if count_sight_occupied(arr, x) == 0
-    ]
-
-    # At occupied spots, check for four or more occupied adjacent spots
-    four_or_more = [
-        x for x in findall(x -> x == '#', arr) if count_sight_occupied(arr, x) >= 5
-    ]
-
-    # At the end, carry out the swaps
-    new_arr = copy(arr)
-    new_arr[all_empty_adjacents] .=  '#'
-    new_arr[four_or_more] .= 'L'
-
-    # Count the number of changes
-    n_changes = sum(new_arr .!= arr)
-    (new_arr, n_changes)
-end
-
-function solve(arr, iterate_fn)
+function solve(arr, adjacent_fn, tolerance)
     n_changes = 1
     while n_changes > 0
-        (arr, n_changes) = iterate_fn(arr)
+        (arr, n_changes) = iterate(arr, adjacent_fn, tolerance)
     end
     @_  count(_ == '#', arr)
 end
@@ -92,9 +71,9 @@ end
     filename = "inputs/day11.txt"
     input_arr = create_bool_array(filename)
 
-    part1_solution = solve(copy(input_arr), iterate_part1)
+    part1_solution = solve(copy(input_arr), count_adjacent_occupied, 4)
     @show part1_solution
 
-    part2_solution = solve(copy(input_arr), iterate_part2)
+    part2_solution = solve(copy(input_arr), count_sight_occupied, 5)
     @show part2_solution
 end
