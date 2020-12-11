@@ -8,7 +8,7 @@ function part1(adapters)
 end
 
 function counter(data::AbstractArray{T}) where T
-    c = Dict()
+    c = Dict{T, Int}()
     for d in data
         if haskey(c, d)
             c[d] += 1
