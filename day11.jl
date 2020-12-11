@@ -9,7 +9,7 @@ function count_adjacent_occupied(arr::AbstractArray, idx)
     row = idx[1]
     col = idx[2]
     sum(
-        arr[CartesianIndex(row_i, col_i)] == '#'
+        arr[row_i, col_i] == '#'
         for (row_i, col_i) in Iterators.product([row-1,row,row+1], [col-1,col,col+1])
         if checkbounds(Bool, arr, row_i, col_i) && !((row_i == row) && (col_i == col))
     )
