@@ -54,8 +54,8 @@ end
 function change_instructions_till_valid(code)
     # Get the indices of jumps and no-ops.
     jmps_and_nops_idx = findall(code .|> first .|> x -> (x == "nop") || (x == "jmp"))
-    
-    # For each location, flip the instruction, test the main loop. 
+
+    # For each location, flip the instruction, test the main loop.
     # Break if state is valid
     accumulator = NaN
     for idx in jmps_and_nops_idx
@@ -82,7 +82,7 @@ function flip_code(code, idx)
     new_code
 end
 
-@time begin
+function main()
     # Script
     filename = "inputs/day08.txt"
     code = build_instructions(filename)
@@ -90,9 +90,13 @@ end
     # Part 1
     (final_value, state) = main_loop(code)
     part1_solution = final_value
-    @show part1_solution
 
     # Part 2
     part2_solution = change_instructions_till_valid(code)
-    @show part2_solution
+
+    (part1_solution, part2_solution)
 end
+
+@time (part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution

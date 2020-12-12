@@ -102,6 +102,6 @@ function main()
     (part1_solution, part2_solution)
 end
 
-(part1_solution, part2_solution) = main()
+@time (part1_solution, part2_solution) = main()
 @show part1_solution
 @show part2_solution

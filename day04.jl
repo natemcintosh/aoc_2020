@@ -72,7 +72,7 @@ function pid(passport)::Bool
 end
 
 
-@time begin
+function main()
     # Script
     filename = "inputs/day04.txt"
     passports = parse_passports(filename)
@@ -80,10 +80,14 @@ end
     # Part 1
     necessary_keys = Set(["byr","iyr","eyr","hgt","hcl","ecl","pid"])
     part1_solution = count(x -> passport_is_valid_part1(x, necessary_keys), passports)
-    @show part1_solution
 
     # Part 2
     field_rules = [byr, iyr, eyr, hgt, hcl, ecl, pid]
     part2_solution = count(x -> passport_is_valid_part2(x, necessary_keys, field_rules), passports)
-    @show part2_solution
+
+    (part1_solution, part2_solution)
 end
+
+@time (part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution

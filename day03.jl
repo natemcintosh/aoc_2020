@@ -24,8 +24,7 @@ function find_locations_visited(arr, start_position, stride_size)
     CartesianIndex.(zip(y_positions, x_positions))
 end
 
-# Script
-@time begin
+function main()
     filename = "inputs/day03.txt"
     arr = create_bool_array(filename)
 
@@ -34,7 +33,6 @@ end
     stride_size = (x=3, y=1)
     visited_indices = find_locations_visited(arr, start_position, stride_size)
     part1_solution = sum(arr[visited_indices])
-    @show part1_solution
 
     # Part 2 solution
     stride_sizes = [
@@ -49,5 +47,10 @@ end
         stride_i -> sum(arr[find_locations_visited(arr, start_position, stride_i)]),
         stride_sizes
         )
-    @show part2_solution
+
+    (part1_solution, part2_solution)
 end
+
+@time (part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution

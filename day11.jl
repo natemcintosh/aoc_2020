@@ -67,13 +67,17 @@ function solve(arr, adjacent_fn, tolerance)
     @_  count(_ == '#', arr)
 end
 
-@time begin
+function main()
     filename = "inputs/day11.txt"
     input_arr = create_bool_array(filename)
 
     part1_solution = solve(copy(input_arr), count_adjacent_occupied, 4)
-    @show part1_solution
 
     part2_solution = solve(copy(input_arr), count_sight_occupied, 5)
-    @show part2_solution
+
+    (part1_solution, part2_solution)
 end
+
+@time (part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution

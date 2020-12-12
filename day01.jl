@@ -14,14 +14,17 @@ function part2(input_numbers)
     only(x*y*z for (x, y, z) in combinations(input_numbers, 3) if x+y+z == 2020)
 end
 
-# Script
-@time begin
+function main()
     filename = "inputs/day01.txt"
     input_numbers = read_input(filename)
 
     part1_solution = part1(input_numbers)
-    @show part1_solution
 
     part2_solution = part2(input_numbers)
-    @show part2_solution
+
+    (part1_solution, part2_solution)
 end
+
+@time (part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution

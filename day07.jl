@@ -60,7 +60,7 @@ function count_inner_bags(bag_key, bags)
 end
 
 
-@time begin
+function main()
     # Script
     filename = "inputs/day07.txt"
     bag_rules_str = readlines(filename)
@@ -69,10 +69,14 @@ end
     all_bags_separate = parse_bag_rule_part1.(bag_rules_str)
     all_bags = build_inverted_map(all_bags_separate)
     part1_solution = length(count_bags(all_bags["shiny gold"], all_bags))
-    @show part1_solution
 
     # Part 2
     all_bags_forward = Dict(parse_bag_rule_part2.(bag_rules_str))
     part2_solution = count_inner_bags("shiny gold", all_bags_forward)
-    @show part2_solution
+
+    (part1_solution, part2_solution)
 end
+
+@time (part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution

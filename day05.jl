@@ -34,7 +34,7 @@ function seat_ID(seat)
 end
 
 
-@time begin
+function main()
     # Script
     filename = "inputs/day05.txt"
     input = readlines(filename)
@@ -42,11 +42,14 @@ end
     # Part 1
     all_seat_ids = seat_ID.(input) |> sort
     part1_solution = maximum(all_seat_ids)
-    @show part1_solution
 
-    # Part 2    
+    # Part 2
     seat_before_me_idx = findall(x -> x > 1, diff(all_seat_ids))
     part2_solution = only(all_seat_ids[seat_before_me_idx]) + 1
-    @show part2_solution
+
+    (part1_solution, part2_solution)
 end
 
+@time (part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution

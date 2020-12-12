@@ -45,14 +45,17 @@ function pswd_is_valid_part_2(input_data)
 end
 
 
-# Script
-@time begin
+function main()
     filename = "inputs/day02.txt"
     input_data = readlines(filename)
 
     part1_solution = count(pswd_is_valid_part_1, input_data)
-    @show part1_solution
 
     part2_solution = count(pswd_is_valid_part_2, input_data)
-    @show part2_solution
+
+    (part1_solution, part2_solution)
 end
+
+@time (part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution

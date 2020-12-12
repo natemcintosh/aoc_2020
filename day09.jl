@@ -31,11 +31,15 @@ end
     end
 end
 
-@time begin
+function main()
     data = parse.(Int, readlines("inputs/day09.txt"))
     part1_solution = part1(data, 25)
-    @show part1_solution
 
     part2_solution = part2(data, part1_solution)
-    @show part2_solution    
+
+    (part1_solution, part2_solution)
 end
+
+@time (part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution

@@ -51,7 +51,7 @@ function part2(adapters)
 end
 
 
-@time begin
+function main()
     adapters = "inputs/day10.txt"         |>
         readlines                         |>
         x -> parse.(Int, x)               |>
@@ -59,8 +59,12 @@ end
         sort
 
     part1_solution = part1(adapters)
-    @show part1_solution
 
     part2_solution = part2(adapters)
-    @show part2_solution
+
+    (part1_solution, part2_solution)
 end
+
+@time (part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution
