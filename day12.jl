@@ -93,12 +93,15 @@ function part2(code)
     abs(ship_pos.x) + abs(ship_pos.y)
 end
 
-@time begin
+function main()
     filename = "inputs/day12.txt"
     code = filename |> readlines .|> parse_line
     part1_solution = part1(code)
-    @show part1_solution
 
     part2_solution = part2(code)
-    @show part2_solution
+    (part1_solution, part2_solution)
 end
+
+(part1_solution, part2_solution) = main()
+@show part1_solution
+@show part2_solution
