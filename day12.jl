@@ -46,8 +46,8 @@ function part1(code)
 end
 
 function *(M::AbstractArray, p::NamedTuple{(:x, :y)})
-    p = M * [p.x; p.y]
-    (x=p[1], y=p[2])
+    p2 = M * [p.x; p.y]
+    (x=p2[1], y=p2[2])
 end
 
 R(θ) = [cosd(θ) -sind(θ); sind(θ) cosd(θ)]
