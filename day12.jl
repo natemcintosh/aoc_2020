@@ -45,7 +45,7 @@ function part1(code)
     abs(ship_pos.x) + abs(ship_pos.y)
 end
 
-function *(M::AbstractArray, p::NamedTuple)
+function *(M::AbstractArray, p::NamedTuple{(:x, :y)})
     p = M * [p.x; p.y]
     (x=p[1], y=p[2])
 end
