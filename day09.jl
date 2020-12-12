@@ -32,7 +32,7 @@ end
 end
 
 @time begin
-    data = parse.(Int, readlines("inputs/day9.txt"))
+    data = parse.(Int, readlines("inputs/day09.txt"))
     part1_solution = part1(data, 25)
     @show part1_solution
 

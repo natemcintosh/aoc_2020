@@ -36,7 +36,7 @@ end
 
 @time begin
     # Script
-    filename = "inputs/day5.txt"
+    filename = "inputs/day05.txt"
     input = readlines(filename)
 
     # Part 1

@@ -74,7 +74,7 @@ end
 
 @time begin
     # Script
-    filename = "inputs/day4.txt"
+    filename = "inputs/day04.txt"
     passports = parse_passports(filename)
 
     # Part 1

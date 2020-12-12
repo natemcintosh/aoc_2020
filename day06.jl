@@ -1,6 +1,6 @@
 @time begin
     # Script
-    answers = read("inputs/day6.txt", String) |> x -> split(x, "\n\n")
+    answers = read("inputs/day06.txt", String) |> x -> split(x, "\n\n")
 
     # Part 1
     part1_answers = replace.(answers, "\n"=>"")

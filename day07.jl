@@ -62,7 +62,7 @@ end
 
 @time begin
     # Script
-    filename = "inputs/day7.txt"
+    filename = "inputs/day07.txt"
     bag_rules_str = readlines(filename)
 
     # Part 1

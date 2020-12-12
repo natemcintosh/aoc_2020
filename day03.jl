@@ -26,7 +26,7 @@ end
 
 # Script
 @time begin
-    filename = "inputs/day3.txt"
+    filename = "inputs/day03.txt"
     arr = create_bool_array(filename)
 
     # Part 1 solution

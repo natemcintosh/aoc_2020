@@ -84,7 +84,7 @@ end
 
 @time begin
     # Script
-    filename = "inputs/day8.txt"
+    filename = "inputs/day08.txt"
     code = build_instructions(filename)
 
     # Part 1

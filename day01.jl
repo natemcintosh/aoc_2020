@@ -16,7 +16,7 @@ end
 
 # Script
 @time begin
-    filename = "inputs/day1.txt"
+    filename = "inputs/day01.txt"
     input_numbers = read_input(filename)
 
     part1_solution = part1(input_numbers)

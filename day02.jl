@@ -47,7 +47,7 @@ end
 
 # Script
 @time begin
-    filename = "inputs/day2.txt"
+    filename = "inputs/day02.txt"
     input_data = readlines(filename)
 
     part1_solution = count(pswd_is_valid_part_1, input_data)
