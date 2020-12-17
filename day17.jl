@@ -18,7 +18,7 @@ function create_ind_set(filename, n_dims)
     char_array = vcat([reshape(slice, :, length(slice)) for slice in nested]...)
 
     zs = zeros(Int, n_dims-2)
-    inds = Set((char_array .== '#') |> findall .|> Tuple .|> x -> (first(x), last(x), zs...))
+    Set((char_array .== '#') |> findall .|> Tuple .|> x -> (first(x), last(x), zs...))
 end
 
 function count_active_neighbors(point, active_points, dirs)
