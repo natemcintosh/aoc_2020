@@ -48,23 +48,23 @@ def iterate(active_points: set, dirs) -> set:
     Iterate one step
     """
     # Get the active spots that turn inactive
-    counted_neighbors_of_active = [
+    counted_neighbors_of_active = (
         count_active_neighbors(p, active_points, dirs) for p in active_points
-    ]
-    active_to_inactive = [
+    )
+    active_to_inactive = (
         p
         for (p, cnt) in zip(active_points, counted_neighbors_of_active)
         if (cnt != 2) and (cnt != 3)
-    ]
+    )
 
     # Get the inactive neighbors
     bubble_out = set(my_add(p, d) for p in active_points for d in dirs)
     inactive_neighbors_of_active = bubble_out.difference(active_points)
-    inactive_to_active = [
+    inactive_to_active = (
         p
         for p in inactive_neighbors_of_active
         if count_active_neighbors(p, active_points, dirs) == 3
-    ]
+    )
 
     # Do set operations to remove active->inactive points, and add new inactive->active points
     return active_points.difference(active_to_inactive).union(inactive_to_active)
