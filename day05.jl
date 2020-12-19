@@ -19,7 +19,7 @@ function recursive_reduce(text, positions, forward_char, backward_char)
     elseif head == backward_char
         new_position = middle+1:last(positions)
     else
-        error("Didn't get a $first_char or $backward_char in $text")
+        error("Didn't get a $forward_char or $backward_char in $text")
     end
     if length(new_position) == 1
         return only(new_position)
