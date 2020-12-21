@@ -33,7 +33,7 @@ end
 function part2(possible_allergen_ingredient_pairs)
     poss = copy(possible_allergen_ingredient_pairs)
     result = Dict()
-    while length(result) != length(possible_allergen_ingredient_pairs)
+    while !isempty(poss)
         # Get pairs with only one option
         good_pairs = Dict(k => only(v) for (k, v) in poss if length(v) == 1)
         # Add this to result
