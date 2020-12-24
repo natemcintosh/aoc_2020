@@ -64,11 +64,7 @@ end
 function counter(data::AbstractArray{T}) where T
     c = Dict{T, Int}()
     for d in data
-        if haskey(c, d)
-            c[d] += 1
-        else
-            c[d] = 1
-        end
+        c[d] = get(c, d, 0) + 1
     end
     c
 end
