@@ -12,7 +12,7 @@ end
 function parse_directions(directions)
     used_last_letter = false
     dirs = Tuple{Int,Int}[]
-    for (idx, (l1, l2)) in enumerate(pairwise(directions))
+    for (l1, l2) in pairwise(directions)
         dir = parse_direction(l1, l2, used_last_letter)
         used_last_letter = dir in ((2, 0), (-2, 0), (0, 0)) ? false : true
         push!(dirs, dir)
