@@ -27,19 +27,19 @@ def parse_input(filename: str, n_dims: int) -> set:
     return set((*s, *zs) for s in pts)
 
 
-def count_active_neighbors(point: tuple, active_pts: set, dirs):
+def count_active_neighbors(point: tuple, active_pts: set, dirs) -> int:
     """
     how many neighbors in the directions `dirs` are active?
     """
     return len(active_pts.intersection(my_add(point, d) for d in dirs))
 
 
-def gen_directions(n_dims):
+def gen_directions(n_dims) -> set:
     """
     Create a collection of unit directions in n dimensions
     """
     return set(itertools.product(*itertools.repeat(range(-1, 2), n_dims))).difference(
-        [tuple([0] * n_dims)]
+        [(0,) * n_dims]
     )
 
 
@@ -99,4 +99,3 @@ if __name__ == "__main__":
 
     run_time = time() - start_time
     print(f"day17 -- {run_time:0.3f}s")
-
