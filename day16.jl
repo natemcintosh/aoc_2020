@@ -1,4 +1,4 @@
-using DataStructures
+#using DataStructures
 
 function parse_input(filename)
     lines = readlines(filename)
