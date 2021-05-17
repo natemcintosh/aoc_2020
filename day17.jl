@@ -4,6 +4,10 @@ const threed_directions = setdiff(vec(collect(Iterators.product(-1:1, -1:1, -1:1
 
 const fourd_directions = setdiff(vec(collect(Iterators.product(-1:1, -1:1, -1:1, -1:1))), [(0,0,0,0)])
 
+function gen_directions(n_dims)
+    setdiff(collect(Iterators.product(repeat([-1:1], n_dims)...)), zeros(n_dims))
+end
+
 function +(t1::Tuple{T,T,T}, t2::Tuple{T,T,T}) where T <: Number
     t1 .+ t2
 end
@@ -51,10 +55,10 @@ end
 function main()
     filename = "inputs/day17.txt"
     inds_3d = create_ind_set(filename, 3)
-    part1_solution = solve(inds_3d, threed_directions, 6)
+    part1_solution = solve(inds_3d, gen_directions(3), 6)
 
     inds_4d = create_ind_set(filename, 4)
-    part2_solution = solve(inds_4d, fourd_directions, 6)
+    part2_solution = solve(inds_4d, gen_directions(4), 6)
 
     part1_solution, part2_solution
 end
